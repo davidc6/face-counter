@@ -1,6 +1,13 @@
-# A simple face counter app
+# A simple face counter system
 
-The app is split into front-end (`/spa`) and back-end (`/api`) components.
+The system is built with:
+
+- Fastify
+- VueJS
+- Server-side events
+- In-memory data store (simple JS native data structure)
+
+The system is split into front-end (`/spa`) and back-end (`/api`) components.
 
 To bring up the environment:
 
@@ -27,3 +34,7 @@ You can then use links below to access both the SPA and API.
 
 - For API - http://localhost:8000
 - For SPA - http://localhost:5173
+
+## Future features / improvements
+ 
+- Add a JWT refresh token functionality to avoid logging users out
