@@ -31,7 +31,7 @@ export type JWTPayload = {
 }
 
 export enum JobStatus {
-    Enqueued = "enqueued",
-    Progess = "progress",
-    Complete = "complete"
+    Enqueued = "Enqueued",
+    Progess = "Progress",
+    Complete = "Complete"
 }
