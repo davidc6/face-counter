@@ -1,8 +1,10 @@
 <template>
-    <div class="about">
-        <p class="sign-in">Sign in with your email address</p>
-        <input type="email" v-model="email" placeholder="Email address" />
-        <button @click="submit">Sign in</button>
+    <div class="signin">
+        <h1 class="sign-in">Login</h1>
+        <div>
+            <input type="email" v-model="email" placeholder="Email address" />
+            <button @click="submit">Login</button>
+        </div>
     </div>
 </template>
 
@@ -26,8 +28,10 @@ export default {
                     "post",
                     JSON.stringify({ email: this.email })
                 )
-                sessionStorage.setItem("token", response.data.token)
-                this.$router.push("/")
+                if (response?.data?.token) {
+                    sessionStorage.setItem("token", response.data.token)
+                    this.$router.push("/")
+                }
             } catch (e) {
                 console.log(e)
                 this.$router.push("/sign-in")
@@ -38,10 +42,8 @@ export default {
 </script>
 
 <style>
-@media (min-width: 1024px) {
-    .about {
-        display: inline;
-    }
+.signin {
+    text-align: center;
 }
 
 .sign-in {
