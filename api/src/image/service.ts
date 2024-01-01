@@ -35,16 +35,17 @@ export class ImageService {
         // TODO
         if (this.imageCollection.has(imageId)) {
             const image = this.imageCollection.get(imageId) as Image
-            image.status = JobStatus.Progess
-            this.imageEmitter.emit("image-update", image)
 
             setTimeout(() => {
+                image.status = JobStatus.Progess
+                this.imageEmitter.emit("image-update", image)
+            }, 1000)
 
+            setTimeout(() => {
                 image.status = JobStatus.Complete
                 image.info.faceCount = 10
 
                 this.imageEmitter.emit("image-update", image)
-
             }, 3000)
         }
     }
