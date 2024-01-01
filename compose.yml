@@ -1,0 +1,21 @@
+services:
+  api:
+    container_name: faces-api
+    build: ./api
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api/:/workspace/api
+      - /workspace/api/node_modules
+  spa:
+    container_name: faces-spa
+    build: ./spa
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 5173:5173
+    volumes:
+      - ./spa:/workspace/spa
+      - /workspace/spa/node_modules
