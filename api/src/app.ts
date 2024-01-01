@@ -38,7 +38,7 @@ export const build = () => {
 
     // register plugins
     server.register(jwt, {
-        secret: 'veryhiddensecret'
+        secret: 'veryhiddensecret' // Should be part of .env, here just for demo purposes
     })
     server.register(cors, {
         origin: "*",
