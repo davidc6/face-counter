@@ -11,7 +11,7 @@ listeners.forEach((signal) => {
     })
 })
 
-server.listen({ host: 'localhost', port: 8000 }, (err, address) => {
+server.listen({ host: '0.0.0.0', port: 8000 }, (err, address) => {
     if (err) {
         console.log(err);
         process.exit(1);
