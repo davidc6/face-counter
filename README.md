@@ -17,7 +17,7 @@ The system is built with:
 
 - Fastify
 - VueJS
-- Server-side events
+- Server-side events (there are pros and cons to this over WebSockets or Polling but since we only need to receive updates from the server it's sufficient enough)
 - JWT (for authentication)
 - In-memory data store (simple JS native data structure)
 
