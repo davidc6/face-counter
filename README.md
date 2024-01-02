@@ -1,5 +1,7 @@
 # A simple face counter system
 
+## Background
+
 The system allows a user to log in, upload an image and detect number of faces using Google Vision API.
 
 In order to use Google Vision API `USE_GCP` environment variable needs to be set (to `true`) in the projects `compose.yml`. Alternatively, the project will run in emulation mode. Additionally, a service account JSON key is required. The key needs to be:
@@ -19,7 +21,12 @@ The system is built with:
 - JWT (for authentication)
 - In-memory data store (simple JS native data structure)
 
+## Instructions
+
 The system is split into front-end (`/spa`) and back-end (`/api`) components.
+
+I've included a simple bash script that installs `node_modules` outside of containers and starts Docker Compose (tested on Linux and Mac). To run it, you have to in the root directory of this project and run `./run.sh` script.
+
 
 To bring up the environment:
 
