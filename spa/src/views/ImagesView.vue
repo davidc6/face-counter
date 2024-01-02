@@ -29,7 +29,7 @@
               <span>{{ item.name }}</span>
               <span>{{ item.status }}</span>
             </div>
-            <div class="item-info" v-if="item.info?.faceCount">
+            <div class="item-info" v-if="item.info?.faceCount >= 0">
               Face count: {{ item.info?.faceCount }}
             </div>
           </li>
