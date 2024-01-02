@@ -57,7 +57,8 @@ You can then use links below to access both the SPA and API.
 ## Future features / improvements
 
 **This list is frequently being updated**
- 
+
+- TESTS! 
 - Add a JWT refresh token functionality to avoid logging users out
     - The plan is to store it in the cookie since it's a more long lived value (as opposed to the access token itself)
 - Extract URLs into an environment dependent config
