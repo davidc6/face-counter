@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="files" v-if="files.length">
+      <div class="files" v-if="files?.length">
         <h2>Uploads</h2>
         <ul>
           <li v-for="item in files">
