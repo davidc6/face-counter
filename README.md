@@ -33,8 +33,20 @@ If this does not work (and you are getting errors that contain "module cannot be
 You can then use links below to access both the SPA and API.
 
 - For API - http://localhost:8000
-- For SPA - http://localhost:5173
+- For SPA (Single Page Application) - http://localhost:5173
 
 ## Future features / improvements
  
 - Add a JWT refresh token functionality to avoid logging users out
+    - The plan is to store it in the cookie since it's a more long lived value (as opposed to the access token itself)
+- Extract URLs into an environment dependent config
+- Store any secrets in an .env file
+- Error message when duplicate email
+- Handle duplicate images
+- Handle server sent events errors
+- UI improvements
+- Validate email address
+- Validate only image file types
+- Handle duplicate file names 
+- API and SPA logging 
+- Namespace downloads locally
