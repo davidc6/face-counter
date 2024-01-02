@@ -4,6 +4,8 @@ services:
     build: ./api
     environment:
       - NODE_ENV=development
+      - GOOGLE_APPLICATION_CREDENTIALS=./key/vision.json
+      - USE_GCP=false
     ports:
       - 8000:8000
     volumes:

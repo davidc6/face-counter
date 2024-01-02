@@ -1,10 +1,22 @@
 # A simple face counter system
 
+The system allows a user to log in, upload an image and detect number of faces using Google Vision API.
+
+In order to use Google Vision API `USE_GCP` environment variable needs to be set (to `true`) in the projects `compose.yml`. Alternatively, the project will run in emulation mode. Additionally, a service account JSON key is required. The key needs to be:
+
+- Generated in GCP
+- Downloaded
+- Renamed to `vision.json`
+- Pasted into `/api/key` directory
+
+A good summary of the steps outlined [in this Medium post](https://medium.com/@roya90/extracting-text-from-local-images-using-google-vision-api-without-cloud-upload-bf61ab00e036).
+
 The system is built with:
 
 - Fastify
 - VueJS
 - Server-side events
+- JWT (for authentication)
 - In-memory data store (simple JS native data structure)
 
 The system is split into front-end (`/spa`) and back-end (`/api`) components.
@@ -50,3 +62,5 @@ You can then use links below to access both the SPA and API.
 - Handle duplicate file names 
 - API and SPA logging 
 - Namespace downloads locally
+- Clear session storage on server restart
+- Clear JWT token when api/server restarts as no data is stored in memory anymore

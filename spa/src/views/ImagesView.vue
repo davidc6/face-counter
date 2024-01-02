@@ -68,7 +68,7 @@ export default {
       try {
         const token = sessionStorage.getItem("token")
         const response = await request("http://localhost:8000/api/images", token, {}, "post", formData)
-        this.files.push(response.data)
+        this.files.push(response?.data)
         // reset fields
         this.$refs.file.value = null
         this.$refs.filename.value = null
@@ -116,7 +116,7 @@ export default {
 
       if (response.ok) {
         this.isAuthed = true;
-        this.files = response?.data?.images;
+        this.files = response?.data?.images ?? []
 
         await this.eventSource(this.files)
       } else {

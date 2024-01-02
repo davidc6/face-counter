@@ -25,10 +25,13 @@ export default async (server: FastifyInstance) => {
             const image = await server.imageService.insert(file_name)
             await server.userService.updateImage(id, image)
 
-            // Face recognition emulation
-            server.imageService.countFacesEmulator(file_name)
-            // GCP call  
-            // server.imageService.countFaces(file_name).catch(console.log)
+            if (process.env.USE_GCP === 'true') {
+                // Face detection using Google Vision API
+                server.imageService.countFacesGCP(file_name).catch(console.log)
+            } else {
+                // Face detection emulation
+                server.imageService.countFacesEmulator(file_name)
+            }
 
             return reply.status(200).send({ data: image })
         } catch (e) {

@@ -37,26 +37,27 @@ export class ImageService {
         }
     }
 
-    async countFaces(imageId: string) {
+    async countFacesGCP(imageId: string) {
         const image = this.imageCollection.get(imageId) as Image
         const file = path.resolve('uploads', imageId);
 
-        console.log(file)
-
         if (!existsSync(file)) {
-            console.log('NOT FOUND')
-            return Promise.reject('File not found')
+            console.log('Image not found. Required for processing.')
+            return Promise.reject('Image not found. Required for processing.')
         }
 
+        // Start detection
         image.status = JobStatus.Progess
         this.imageEmitter.emit("image-update", image)
         const [result] = await this.vision.faceDetection(file)
 
-        image.status = JobStatus.Complete
-
+        // Complete detection
         const faces = result.faceAnnotations;
         const count = faces && faces.length ? faces.length : 0;
-        image.info.countFaces = count
+
+        image.info.faceCount = count
+        image.status = JobStatus.Complete
+
         this.imageEmitter.emit("image-update", image)
         return
     }
