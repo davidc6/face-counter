@@ -1,16 +1,22 @@
 import EventEmitter from "events";
+import vision, { ImageAnnotatorClient } from "@google-cloud/vision"
 import { JobStatus } from "../types";
+import { randomIntFromInterval } from "../utils/random"
+import path from "path";
+import { existsSync } from "fs";
 
 type Image = Record<string, any>
 type ImageCollection = Map<string, Image>
 
 export class ImageService {
-    private imageCollection: ImageCollection;
+    private imageCollection: ImageCollection
     private imageEmitter: EventEmitter
+    private vision: ImageAnnotatorClient
 
     constructor(imageCollection, imageEmitter) {
         this.imageCollection = imageCollection
         this.imageEmitter = imageEmitter
+        this.vision = new vision.ImageAnnotatorClient()
     }
 
     insert(id: string) {
@@ -31,19 +37,48 @@ export class ImageService {
         }
     }
 
-    processFaceDetection(imageId: string) {
-        // TODO
+    async countFaces(imageId: string) {
+        const image = this.imageCollection.get(imageId) as Image
+        const file = path.resolve('uploads', imageId);
+
+        console.log(file)
+
+        if (!existsSync(file)) {
+            console.log('NOT FOUND')
+            return Promise.reject('File not found')
+        }
+
+        image.status = JobStatus.Progess
+        this.imageEmitter.emit("image-update", image)
+        const [result] = await this.vision.faceDetection(file)
+
+        image.status = JobStatus.Complete
+
+        const faces = result.faceAnnotations;
+        const count = faces && faces.length ? faces.length : 0;
+        image.info.countFaces = count
+        this.imageEmitter.emit("image-update", image)
+        return
+    }
+
+    /**
+     * Emulates face recognision process.
+     * Timeouts added just to show transition between different states.
+     * 
+     * @param imageId Image id
+     */
+    countFacesEmulator(imageId: string) {
         if (this.imageCollection.has(imageId)) {
             const image = this.imageCollection.get(imageId) as Image
 
             setTimeout(() => {
                 image.status = JobStatus.Progess
                 this.imageEmitter.emit("image-update", image)
-            }, 1000)
+            }, 1500)
 
             setTimeout(() => {
                 image.status = JobStatus.Complete
-                image.info.faceCount = 10
+                image.info.faceCount = randomIntFromInterval(0, 20)
 
                 this.imageEmitter.emit("image-update", image)
             }, 3000)

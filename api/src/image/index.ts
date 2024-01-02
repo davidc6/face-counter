@@ -25,7 +25,10 @@ export default async (server: FastifyInstance) => {
             const image = await server.imageService.insert(file_name)
             await server.userService.updateImage(id, image)
 
-            server.imageService.processFaceDetection(file_name)
+            // Face recognition emulation
+            server.imageService.countFacesEmulator(file_name)
+            // GCP call  
+            // server.imageService.countFaces(file_name).catch(console.log)
 
             return reply.status(200).send({ data: image })
         } catch (e) {
